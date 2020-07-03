@@ -25,13 +25,13 @@ THE SOFTWARE.
 #include "stp/AbsRefineCounterExample/AbsRefine_CounterExample.h"
 #include "stp/Printer/printers.h"
 #include "stp/ToSat/ToSATAIG.h"
-
+#include <fstream>
 const bool debug_counterexample = false;
 
 namespace stp
 {
 using std::cout;
-
+using std::ofstream;
 /*FUNCTION: constructs counterexample from MINISAT counterexample
  * step1 : iterate through MINISAT counterexample and assemble the
  * bits for each AST term. Store it in a map from ASTNode to vector
@@ -64,7 +64,11 @@ void AbsRefine_CounterExample::ConstructCounterExample(
 
     for (size_t index = 0; index < v.size(); index++)
     {
+      
       const unsigned sat_variable_index = v[index];
+      ofstream outdata;
+      outdata.open("var_index.txt",std::ios_base::app);
+      outdata<<sat_variable_index<<" ";
 
       if (sat_variable_index == ~((unsigned)0)) // not sent to the sat solver.
         continue;
