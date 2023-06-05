@@ -449,9 +449,10 @@ include_directories(# For extlib-abc and extlib-constbv
                     ${PROJECT_SOURCE_DIR}/lib
                    )
 
+
 option(ONLY_SIMPLE "Only build very simplistic executable -- no Boost needed" OFF)
 if (NOT ONLY_SIMPLE)
-  find_package( Boost 1.46 COMPONENTS program_options)
+  find_package( Boost 1.46 COMPONENTS program_options serialization)
 endif()
 
 if(NOT Boost_FOUND)
